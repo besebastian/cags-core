@@ -37,5 +37,17 @@ define(function () {
         return this;
     };
 
+    AssetLoader.prototype.get = function (key) {
+        try {
+            if (this.images[key] === undefined) {
+                throw new Error('No asset found with the key: ' + key);
+            } else {
+                return this.images[key];
+            }
+        } catch (e) {
+            throw new Error(e.message);
+        }
+    };
+
     return AssetLoader;
 });

@@ -1,9 +1,11 @@
 define([
     'AssetLoader',
-    'Renderer'
+    'Renderer',
+    'Screen'
 ], function (
     AssetLoader,
-    Renderer
+    Renderer,
+    Screen
 ) {
     'use strict';
 
@@ -17,10 +19,15 @@ define([
         this.assets.load();
     }
 
+    CAGS.prototype.afterLoad = function () {
+        this.renderer.setScreen(new Screen(this.assets.get('test-background')));
+        this.loop();
+    };
+
     CAGS.prototype.eventListeners = function () {
         var _this = this;
         document.addEventListener('hasLoaded', function () {
-            _this.loop();
+            _this.afterLoad();
         });
     };
 
@@ -51,9 +58,13 @@ define([
     };
 
     CAGS.prototype.loop = function () {
-        this.update();
-        this.draw();
-        requestAnimationFrame(this.loop.bind(this));
+        try {
+            this.update();
+            this.draw();
+            requestAnimationFrame(this.loop.bind(this));
+        } catch (e) {
+            console.error(e.message);
+        }
     };
 
     CAGS.prototype.update = function () {
@@ -61,7 +72,11 @@ define([
     };
 
     CAGS.prototype.draw = function () {
-
+        try {
+            this.renderer.draw();
+        } catch (e) {
+            throw new Error(e);
+        }
     };
 
     return CAGS;

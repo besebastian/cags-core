@@ -6,6 +6,10 @@ define(function () {
         this.hotspots = [];
     }
 
+    Screen.prototype.getBackground = function () {
+        return this.background;
+    };
+
     Screen.prototype.addHotspot = function (hotspot) {
         this.hotspots.push(hotspot);
         return this;
@@ -16,5 +20,5 @@ define(function () {
         return this;
     };
 
-    return Room;
+    return Screen;
 });
