@@ -1,0 +1,19 @@
+{
+    "forin": true,
+    "noarg": true,
+    "noempty": true,
+    "laxbreak": true,
+    "camelcase": true,
+    "eqeqeq": true,
+    "bitwise": true,
+    "strict": true,
+    "unused": false,
+    "curly": true,
+    "browser": true,
+    "devel": true,
+    "indent": 4,
+    "trailing": true,
+    "maxerr": 100,
+    "quotmark": true
+
+}
