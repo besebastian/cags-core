@@ -4,6 +4,7 @@ define(function () {
     function Renderer(width, height) {
         this.width = width;
         this.height = height;
+        this.renderHotspots = false;
 
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'cags-viewport';

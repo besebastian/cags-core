@@ -5,10 +5,8 @@ requirejs.config({
         'CAGS':             'core/CAGS',
         'Input':            'core/Input',
         'Renderer':         'core/Renderer',
-
-        // Areas
-        'Map':              'area/Map',
-        'Screen':           'area/Screen',
+        'AssetLoader':      'core/AssetLoader',
+        'Screen':           'core/Screen',
 
         // Creatures
         'Creature':         'thing/Creature',

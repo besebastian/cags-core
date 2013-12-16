@@ -1,6 +1,8 @@
 define([
+    'AssetLoader',
     'Renderer'
 ], function (
+    AssetLoader,
     Renderer
 ) {
     'use strict';
@@ -8,10 +10,22 @@ define([
     function CAGS() {
         this.renderer = new Renderer(640, 480);
         this.polyfillAnimationFrame();
-        this.loop();
+        this.eventListeners();
+
+        this.assets = new AssetLoader();
+        this.assets.add('image', 'test-background', '/assets/img/test-back.png');
+        this.assets.load();
     }
 
+    CAGS.prototype.eventListeners = function () {
+        var _this = this;
+        document.addEventListener('hasLoaded', function () {
+            _this.loop();
+        });
+    };
+
     // RequestAnimationFrame polyfill by Paul Irish
+    // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
     CAGS.prototype.polyfillAnimationFrame = function () {
         var lastTime = 0;
         var vendors = ['webkit', 'moz'];
@@ -39,7 +53,6 @@ define([
     CAGS.prototype.loop = function () {
         this.update();
         this.draw();
-
         requestAnimationFrame(this.loop.bind(this));
     };
 
@@ -48,7 +61,7 @@ define([
     };
 
     CAGS.prototype.draw = function () {
-    
+
     };
 
     return CAGS;
