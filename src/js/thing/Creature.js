@@ -5,8 +5,11 @@ define([
 ) {
     'use strict';
 
-    function Creature(position) {
+    function Creature(position, sprite) {
         this.position = position;
+        this.sprite = sprite;
+        this.tileWidth = null;
+        this.tileHeight = null;
     }
 
     return Creature;

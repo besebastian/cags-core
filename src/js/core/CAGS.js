@@ -1,11 +1,15 @@
 define([
     'AssetLoader',
     'Renderer',
-    'Screen'
+    'Screen',
+    'Point',
+    'Player'
 ], function (
     AssetLoader,
     Renderer,
-    Screen
+    Screen,
+    Point,
+    Player
 ) {
     'use strict';
 
@@ -16,11 +20,13 @@ define([
 
         this.assets = new AssetLoader();
         this.assets.add('image', 'test-background', '/assets/img/test-back.png');
+        this.assets.add('image', 'test-spritesheet', '/assets/img/test-sprite.png');
         this.assets.load();
     }
 
     CAGS.prototype.afterLoad = function () {
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
+        this.player = new Player(new Point(0, 0), this.assets.get('test-spritesheet'));
         this.loop();
     };
 
@@ -74,6 +80,7 @@ define([
     CAGS.prototype.draw = function () {
         try {
             this.renderer.draw();
+            this.player.drawWalking(this.renderer.context);
         } catch (e) {
             throw new Error(e);
         }
