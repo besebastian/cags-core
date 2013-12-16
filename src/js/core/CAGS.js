@@ -3,13 +3,15 @@ define([
     'Renderer',
     'Screen',
     'Point',
-    'Player'
+    'Player',
+    'Input'
 ], function (
     AssetLoader,
     Renderer,
     Screen,
     Point,
-    Player
+    Player,
+    Input
 ) {
     'use strict';
 
@@ -27,6 +29,7 @@ define([
     CAGS.prototype.afterLoad = function () {
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
         this.player = new Player(new Point(0, 0), this.assets.get('test-spritesheet'));
+        this.input = new Input(this.renderer.canvas, this.player);
         this.loop();
     };
 

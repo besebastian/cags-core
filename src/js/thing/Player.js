@@ -27,8 +27,8 @@ define([
     };
 
     Player.prototype.drawWalking = function (context) {
-        context.drawImage(this.sprite, this.currentFrame * this.tileWidth, 0, this.tileWidth, this.tileHeight, 0, 0, this.tileWidth, this.tileHeight);
-        if (this.animationDelay === 10) {
+        context.drawImage(this.sprite, this.currentFrame * this.tileWidth, 0, this.tileWidth, this.tileHeight, this.position.x - (this.tileWidth / 2), this.position.y - this.tileHeight, this.tileWidth, this.tileHeight);
+        if (this.animationDelay === 5) {
             if (this.currentFrame < this.maxFrames) {
                 this.currentFrame++;
             } else {
@@ -38,6 +38,10 @@ define([
         } else {
             this.animationDelay++;
         }
+    };
+
+    Player.prototype.moveTo = function (point) {
+        this.position = point;
     };
 
     return Player;
