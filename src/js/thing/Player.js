@@ -16,6 +16,8 @@ define([
         this.currentFrame = 0;
         this.maxFrames = 3;
         this.animationDelay = 0;
+        this.speed = 3;
+        this.destination = this.position;
     }
 
     Player.prototype.load = function () {
@@ -41,7 +43,24 @@ define([
     };
 
     Player.prototype.moveTo = function (point) {
-        this.position = point;
+        this.destination = point;
+    };
+
+    Player.prototype.update = function () {
+        if (this.position !== this.destination) {
+            if (this.position.x > this.destination.x) {
+                this.position.x -= this.speed;
+            }
+            if (this.position.y > this.destination.y) {
+                this.position.y -= this.speed;
+            }
+            if (this.position.x < this.destination.x) {
+                this.position.x += this.speed;
+            }
+            if (this.position.y < this.destination.y) {
+                this.position.y += this.speed;
+            }
+        }
     };
 
     return Player;

@@ -77,7 +77,7 @@ define([
     };
 
     CAGS.prototype.update = function () {
-
+        this.player.update();
     };
 
     CAGS.prototype.draw = function () {
