@@ -1,7 +1,7 @@
 define(function () {
     'use strict';
 
-    function Room() {
+    function Screen() {
         this.hotspots = [];
     }
 
