@@ -18,6 +18,8 @@ requirejs.config({
         // Utils
         'Action':           'utils/Action',
         'ActionFactory':    'utils/ActionFactory',
+        'Animation':        'utils/Animation',
+        'AnimationSet':     'utils/AnimationSet',
         'Point':            'utils/Point',
         'Hotspot':          'utils/Hotspot'
     }

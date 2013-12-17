@@ -17,7 +17,7 @@ define([
     };
 
     Input.prototype.mouseDown = function () {
-        console.log('mousedown');
+
     };
 
     Input.prototype.mouseUp = function (event) {

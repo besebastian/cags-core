@@ -8,16 +8,12 @@ define([
     Player.prototype = new Creature();
     Player.prototype.constructor = Player;
 
-    function Player(position, sprite) {
-        Creature.call(this, position, sprite);
+    function Player(position, animationSet) {
+        Creature.call(this, position, animationSet);
         this.inventory = [];
-        this.tileWidth = 20;
-        this.tileHeight = 30;
-        this.currentFrame = 0;
-        this.maxFrames = 3;
-        this.animationDelay = 0;
         this.speed = 3;
         this.destination = this.position;
+        this.currentAnimation = this.animationSet.walking;
     }
 
     Player.prototype.load = function () {
@@ -28,18 +24,8 @@ define([
 
     };
 
-    Player.prototype.drawWalking = function (context) {
-        context.drawImage(this.sprite, this.currentFrame * this.tileWidth, 0, this.tileWidth, this.tileHeight, this.position.x - (this.tileWidth / 2), this.position.y - this.tileHeight, this.tileWidth, this.tileHeight);
-        if (this.animationDelay === 5) {
-            if (this.currentFrame < this.maxFrames) {
-                this.currentFrame++;
-            } else {
-                this.currentFrame = 0;
-            }
-            this.animationDelay = 0;
-        } else {
-            this.animationDelay++;
-        }
+    Player.prototype.draw = function (context) {
+        this.currentAnimation.draw(context, this.position.x, this.position.y);
     };
 
     Player.prototype.moveTo = function (point) {
@@ -47,7 +33,9 @@ define([
     };
 
     Player.prototype.update = function () {
-        if (this.position !== this.destination) {
+        this.currentAnimation.update();
+        if (this.position.x !== this.destination.x && this.position.y !== this.destination.y) {
+            this.currentAnimation = this.animationSet.walking;
             if (this.position.x > this.destination.x) {
                 this.position.x -= this.speed;
             }
@@ -60,6 +48,9 @@ define([
             if (this.position.y < this.destination.y) {
                 this.position.y += this.speed;
             }
+        } else {
+            console.log('idle');
+            this.currentAnimation = this.animationSet.idle;
         }
     };
 

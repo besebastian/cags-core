@@ -4,14 +4,16 @@ define([
     'Screen',
     'Point',
     'Player',
-    'Input'
+    'Input',
+    'AnimationSet'
 ], function (
     AssetLoader,
     Renderer,
     Screen,
     Point,
     Player,
-    Input
+    Input,
+    AnimationSet
 ) {
     'use strict';
 
@@ -28,7 +30,7 @@ define([
 
     CAGS.prototype.afterLoad = function () {
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
-        this.player = new Player(new Point(0, 0), this.assets.get('test-spritesheet'));
+        this.player = new Player(new Point(0, 0), new AnimationSet(this.assets.get('test-spritesheet'), 20, 30));
         this.input = new Input(this.renderer.canvas, this.player);
         this.loop();
     };
@@ -83,7 +85,7 @@ define([
     CAGS.prototype.draw = function () {
         try {
             this.renderer.draw();
-            this.player.drawWalking(this.renderer.context);
+            this.player.draw(this.renderer.context);
         } catch (e) {
             throw new Error(e);
         }

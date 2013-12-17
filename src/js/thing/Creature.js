@@ -5,9 +5,9 @@ define([
 ) {
     'use strict';
 
-    function Creature(position, sprite) {
+    function Creature(position, animationSet) {
         this.position = position;
-        this.sprite = sprite;
+        this.animationSet = animationSet;
         this.tileWidth = null;
         this.tileHeight = null;
     }
