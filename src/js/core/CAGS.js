@@ -23,8 +23,8 @@ define([
         this.eventListeners();
 
         this.assets = new AssetLoader();
-        this.assets.add('image', 'test-background', '/assets/img/test-back.png');
-        this.assets.add('image', 'test-spritesheet', '/assets/img/test-sprite.png');
+        this.assets.add('image', 'test-background', 'assets/img/test-back.png');
+        this.assets.add('image', 'test-spritesheet', 'assets/img/test-sprite.png');
         this.assets.load();
     }
 
