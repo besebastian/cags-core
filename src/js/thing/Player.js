@@ -13,7 +13,7 @@ define([
         this.inventory = [];
         this.speed = 3;
         this.destination = this.position;
-        this.currentAnimation = this.animationSet.walking;
+        this.currentAnimation = this.animationSet.idle;
     }
 
     Player.prototype.load = function () {
@@ -28,14 +28,22 @@ define([
         this.currentAnimation.draw(context, this.position.x, this.position.y);
     };
 
+    Player.prototype.update = function () {
+        this.currentAnimation.update();
+        this.handleMovement();
+    };
+
     Player.prototype.moveTo = function (point) {
         this.destination = point;
     };
 
-    Player.prototype.update = function () {
-        this.currentAnimation.update();
+    Player.prototype.handleMovement = function () {
         if (this.position.x !== this.destination.x || this.position.y !== this.destination.y) {
-            this.currentAnimation = this.animationSet.walking;
+            if (this.position.x > this.destination.x) {
+                this.currentAnimation = this.animationSet.walking.left;
+            } else {
+                this.currentAnimation = this.animationSet.walking.right;
+            }
             if (this.position.x > this.destination.x) {
                 if (this.position.x - this.destination.x > this.speed) {
                     this.position.x -= this.speed;

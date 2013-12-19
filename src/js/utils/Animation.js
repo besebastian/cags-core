@@ -26,7 +26,7 @@ define(function () {
     };
 
     Animation.prototype.draw = function (context, x, y) {
-        context.drawImage(this.spritesheet, this.currentFrame * this.tileWidth, this.row, this.tileWidth, this.tileHeight, x - (this.tileWidth / 2), y - this.tileHeight, this.tileWidth, this.tileHeight);
+        context.drawImage(this.spritesheet, this.currentFrame * this.tileWidth, this.row * this.tileHeight, this.tileWidth, this.tileHeight, x - (this.tileWidth / 2), y - this.tileHeight, this.tileWidth, this.tileHeight);
     };
 
     return Animation;
