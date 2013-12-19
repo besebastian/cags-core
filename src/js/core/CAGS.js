@@ -30,8 +30,8 @@ define([
 
     CAGS.prototype.afterLoad = function () {
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
-        this.player = new Player(new Point(0, 0), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
-        this.input = new Input(this.renderer.canvas, this.player);
+        this.player = new Player(new Point(320, 400), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
+        this.input = new Input(this.renderer, this.player);
         this.loop();
     };
 

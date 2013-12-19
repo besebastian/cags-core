@@ -5,9 +5,10 @@ define([
 ) {
     'use strict';
 
-    function Input(canvas, player) {
-        this.canvas = canvas;
+    function Input(renderer, player) {
+        this.canvas = renderer.canvas;
         this.player = player;
+        this.screen = renderer.screen;
         this.eventHandlers();
     }
 
@@ -16,13 +17,27 @@ define([
         this.canvas.addEventListener('mouseup', this.mouseUp.bind(this), false);
     };
 
-    Input.prototype.mouseDown = function () {
+    Input.prototype.mouseDown = function (e) {
 
     };
 
     Input.prototype.mouseUp = function (event) {
-        this.player.moveTo(new Point(event.offsetX, event.offsetY));
+        if (this.isMoveableLocation(this.screen.floorVerts, event.offsetX, event.offsetY)) {
+            this.player.moveTo(new Point(event.offsetX, event.offsetY));
+        }
     };
+
+    Input.prototype.isMoveableLocation = function (poly, pointx, pointy) {
+        var i, j;
+        var inside = false;
+        for (i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+            if (((poly[i].y > pointy) !== (poly[j].y > pointy)) && (pointx < (poly[j].x - poly[i].x) * (pointy - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x) ) {
+                inside = !inside;
+            }
+        }
+        return inside;
+    };
+
 
     return Input;
 });

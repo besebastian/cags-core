@@ -24,7 +24,7 @@ define(function () {
         if (this.screen === null) {
             throw new Error('No Screen exists to render.');
         }
-        this.context.drawImage(this.screen.getBackground(), 0, 0);
+        this.screen.draw(this.context);
     };
 
     Renderer.prototype.setScreen = function (screen) {
