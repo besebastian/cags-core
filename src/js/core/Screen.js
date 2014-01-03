@@ -21,18 +21,20 @@ define([
 
     Screen.prototype.draw = function (context) {
         context.drawImage(this.background, 0, 0);
-        if (this.floorVerts.length > 0) {
-            context.fillStyle = 'red';
-            context.beginPath();
-            for (var i = 0; i < this.floorVerts.length; i++) {
-                if (i === 0) {
-                    context.moveTo(this.floorVerts[i].x, this.floorVerts[i].y);
-                } else {
-                    context.lineTo(this.floorVerts[i].x, this.floorVerts[i].y);
+        if (window.cags !== undefined && window.cags.debug) {
+            if (this.floorVerts.length > 0) {
+                context.fillStyle = 'red';
+                context.beginPath();
+                for (var i = 0; i < this.floorVerts.length; i++) {
+                    if (i === 0) {
+                        context.moveTo(this.floorVerts[i].x, this.floorVerts[i].y);
+                    } else {
+                        context.lineTo(this.floorVerts[i].x, this.floorVerts[i].y);
+                    }
                 }
+                context.closePath();
+                context.fill();
             }
-            context.closePath();
-            context.fill();
         }
     };
 

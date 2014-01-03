@@ -6,7 +6,12 @@ require([
     'use strict';
 
     (function () {
-        window.cags = new CAGS();
+        var params = {
+            'width': 640,
+            'height': 480,
+            'title': 'Test CAGS Game'
+        };
+        window.cags = new CAGS(params);
     })();
 });
 

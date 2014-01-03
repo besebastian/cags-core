@@ -17,10 +17,14 @@ define([
 ) {
     'use strict';
 
-    function CAGS() {
-        this.renderer = new Renderer(640, 480);
+    function CAGS(opts) {
+        this.options = opts;
+        this.renderer = new Renderer(this.options.width, this.options.height);
         this.polyfillAnimationFrame();
         this.eventListeners();
+        document.title = this.options.title;
+
+        this.debug = false;
 
         this.assets = new AssetLoader();
         this.assets.add('image', 'test-background', 'assets/img/test-back.png');
