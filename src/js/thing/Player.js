@@ -1,7 +1,9 @@
 define([
-    'Creature'
+    'Creature',
+    'Direction'
 ], function (
-    Creature
+    Creature,
+    Direction
 ) {
     'use strict';
 
@@ -13,7 +15,8 @@ define([
         this.inventory = [];
         this.speed = 3;
         this.destination = this.position;
-        this.currentAnimation = this.animationSet.idle;
+        this.currentAnimation = this.animationSet.idle.right;
+        this.direction = Direction.RIGHT;
     }
 
     Player.prototype.load = function () {
@@ -41,8 +44,10 @@ define([
         if (this.position.x !== this.destination.x || this.position.y !== this.destination.y) {
             if (this.position.x > this.destination.x) {
                 this.currentAnimation = this.animationSet.walking.left;
+                this.direction = Direction.LEFT;
             } else {
                 this.currentAnimation = this.animationSet.walking.right;
+                this.direction = Direction.RIGHT;
             }
             if (this.position.x > this.destination.x) {
                 if (this.position.x - this.destination.x > this.speed) {
@@ -73,7 +78,11 @@ define([
                 }
             }
         } else {
-            this.currentAnimation = this.animationSet.idle;
+            if (this.direction === Direction.LEFT) {
+                this.currentAnimation = this.animationSet.idle.left;
+            } else {
+                this.currentAnimation = this.animationSet.idle.right;
+            }
         }
     };
 

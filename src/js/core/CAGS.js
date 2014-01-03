@@ -1,4 +1,5 @@
 define([
+    'lodash',
     'AssetLoader',
     'Renderer',
     'Screen',
@@ -7,6 +8,7 @@ define([
     'Input',
     'AnimationSet'
 ], function (
+    _,
     AssetLoader,
     Renderer,
     Screen,
@@ -18,7 +20,11 @@ define([
     'use strict';
 
     function CAGS(opts) {
-        this.options = opts;
+        this.options = _.extend({
+            'width': 640,
+            'height': 480,
+            'title': 'Default CAGS Title'
+        }, opts);
         this.renderer = new Renderer(this.options.width, this.options.height);
         this.polyfillAnimationFrame();
         this.eventListeners();

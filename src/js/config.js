@@ -1,6 +1,9 @@
 requirejs.config({
     deps: ['main'],
     paths: {
+        // Dependencies
+        'lodash':           'vendor/lodash.min',
+
         // Core
         'CAGS':             'core/CAGS',
         'Input':            'core/Input',
@@ -15,13 +18,18 @@ requirejs.config({
         // Items
         'Item':             'items/Item',
 
+        // Actions
+        'Action':           'actions/Action',
+        'ActionFactory':    'actions/ActionFactory',
+
+        // Art
+        'Animation':        'art/Animation',
+        'AnimationSet':     'art/AnimationSet',
+
         // Utils
-        'Action':           'utils/Action',
-        'ActionFactory':    'utils/ActionFactory',
-        'Animation':        'utils/Animation',
-        'AnimationSet':     'utils/AnimationSet',
         'Point':            'utils/Point',
-        'Hotspot':          'utils/Hotspot'
+        'Hotspot':          'utils/Hotspot',
+        'Direction':        'utils/Direction'
     }
 });
 
