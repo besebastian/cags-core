@@ -15,17 +15,12 @@ define([
     }
 
     Input.prototype.eventHandlers = function () {
-        this.canvas.addEventListener('mousedown', this.mouseDown.bind(this), false);
         this.canvas.addEventListener('mouseup', this.mouseUp.bind(this), false);
-        this.canvas.addEventListener('mousemove', this.mouseMove.bind(this), false);
+        this.canvas.addEventListener('mousemove', _.debounce(this.mouseMove.bind(this), 3), false);
     };
 
     Input.prototype.mouseMove = function (event) {
         this.cursorPos = new Point(event.offsetX, event.offsetY);
-    };
-
-    Input.prototype.mouseDown = function (event) {
-
     };
 
     Input.prototype.mouseUp = function (event) {
@@ -46,7 +41,11 @@ define([
     };
 
     Input.prototype.draw = function (context) {
-        context.drawImage(this.cursors, 0, 0, 16, 16, this.cursorPos.x - 8, this.cursorPos.y - 8, 16, 16);
+        var offset = 0;
+        if (this.isMoveableLocation(this.screen.floorVerts, this.cursorPos.x, this.cursorPos.y)) {
+            offset = 16;
+        }
+        context.drawImage(this.cursors, offset, 0, 16, 16, this.cursorPos.x - 8, this.cursorPos.y - 8, 16, 16);
     };
 
     return Input;
