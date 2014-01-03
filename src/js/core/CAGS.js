@@ -35,13 +35,14 @@ define([
         this.assets = new AssetLoader();
         this.assets.add('image', 'test-background', 'assets/img/test-back.png');
         this.assets.add('image', 'test-spritesheet', 'assets/img/test-sprite.png');
+        this.assets.add('image', 'test-cursors', 'assets/img/test-cursors.png');
         this.assets.load();
     }
 
     CAGS.prototype.afterLoad = function () {
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
         this.player = new Player(new Point(320, 400), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
-        this.input = new Input(this.renderer, this.player);
+        this.input = new Input(this.assets.get('test-cursors'), this.renderer, this.player);
         this.loop();
     };
 
@@ -96,6 +97,7 @@ define([
         try {
             this.renderer.draw();
             this.player.draw(this.renderer.context);
+            this.input.draw(this.renderer.context);
         } catch (e) {
             throw new Error(e);
         }
