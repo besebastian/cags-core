@@ -118,7 +118,6 @@ define([
                 entity.draw(_this.renderer.context);
             });
             this.player.draw(this.renderer.context);
-            this.input.draw(this.renderer.context);
         } catch (e) {
             throw new Error(e);
         }
