@@ -14,6 +14,11 @@ requirejs.config({
         // Creatures
         'Creature':         'thing/Creature',
         'Player':           'thing/Player',
+        'NPC':              'thing/NPC',
+
+        // Dialog
+        'Line':             'dialog/Line',
+        'DialogTree':       'dialog/DialogTree',
 
         // Items
         'Item':             'items/Item',

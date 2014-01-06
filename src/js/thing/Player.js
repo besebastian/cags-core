@@ -15,8 +15,8 @@ define([
         this.inventory = [];
         this.speed = 3;
         this.destination = this.position;
-        this.currentAnimation = this.animationSet.idle.right;
         this.direction = Direction.RIGHT;
+        this.currentAnimation = this.animationSet.idle.right;
     }
 
     Player.prototype.load = function () {
@@ -25,10 +25,6 @@ define([
 
     Player.prototype.save = function () {
 
-    };
-
-    Player.prototype.draw = function (context) {
-        this.currentAnimation.draw(context, this.position.x, this.position.y);
     };
 
     Player.prototype.update = function () {

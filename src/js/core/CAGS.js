@@ -5,6 +5,7 @@ define([
     'Screen',
     'Point',
     'Player',
+    'NPC',
     'Input',
     'AnimationSet'
 ], function (
@@ -14,6 +15,7 @@ define([
     Screen,
     Point,
     Player,
+    NPC,
     Input,
     AnimationSet
 ) {
@@ -25,12 +27,15 @@ define([
             'height': 480,
             'title': 'Default CAGS Title'
         }, opts);
+
         this.renderer = new Renderer(this.options.width, this.options.height);
         this.polyfillAnimationFrame();
         this.eventListeners();
         document.title = this.options.title;
 
         this.debug = false;
+
+        this.entities = [];
 
         this.assets = new AssetLoader();
         this.assets.add('image', 'test-background', 'assets/img/test-back.png');
@@ -43,6 +48,11 @@ define([
         this.renderer.setScreen(new Screen(this.assets.get('test-background')));
         this.player = new Player(new Point(320, 400), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
         this.input = new Input(this.assets.get('test-cursors'), this.renderer, this.player);
+
+        // Purely a test NPC
+        var npcTest = new NPC(new Point(100, 400), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
+        this.entities.push(npcTest);
+
         this.loop();
     };
 
@@ -90,12 +100,23 @@ define([
     };
 
     CAGS.prototype.update = function () {
-        this.player.update();
+        try {
+            _.forEach(this.entities, function (entity) {
+                entity.update();
+            });
+            this.player.update();
+        } catch (e) {
+            throw new Error(e);
+        }
     };
 
     CAGS.prototype.draw = function () {
+        var _this = this;
         try {
             this.renderer.draw();
+            _.forEach(this.entities, function (entity) {
+                entity.draw(_this.renderer.context);
+            });
             this.player.draw(this.renderer.context);
             this.input.draw(this.renderer.context);
         } catch (e) {
