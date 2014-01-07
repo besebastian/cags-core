@@ -10,6 +10,7 @@ requirejs.config({
         'Renderer':         'core/Renderer',
         'AssetLoader':      'core/AssetLoader',
         'Screen':           'core/Screen',
+        'UILayer':          'core/UILayer',
 
         // Creatures
         'Creature':         'thing/Creature',

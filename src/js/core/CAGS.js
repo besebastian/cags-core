@@ -2,6 +2,7 @@ define([
     'lodash',
     'AssetLoader',
     'Renderer',
+    'UILayer',
     'Screen',
     'Point',
     'Player',
@@ -12,6 +13,7 @@ define([
     _,
     AssetLoader,
     Renderer,
+    UILayer,
     Screen,
     Point,
     Player,
@@ -29,6 +31,7 @@ define([
         }, opts);
 
         this.renderer = new Renderer(this.options.width, this.options.height);
+        this.uilayer = new UILayer();
         this.polyfillAnimationFrame();
         this.eventListeners();
         document.title = this.options.title;
@@ -51,14 +54,16 @@ define([
 
         // Purely a test NPC
         var npcTest = new NPC(new Point(100, 400), new AnimationSet(this.assets.get('test-spritesheet'), 20, 32));
-        var dialogTree = [
-            { 'line1': 'hello' },
-            { 'line2': 'hello again' },
-            { 'line3': [
-                { 'subline1': 'wat' },
-                { 'subline2': 'durr' }
-            ]}
-        ];
+        var dialogTree = {
+            'line1': 'hello',
+            'line2': 'hello again',
+            'line3': {
+                'subline1': 'wat',
+                'subline2': {
+                    'second subtree': 'rar'
+                }
+            }
+        };
         npcTest.addDialog(dialogTree);
         this.entities.push(npcTest);
 

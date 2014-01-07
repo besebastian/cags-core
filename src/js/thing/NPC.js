@@ -13,9 +13,5 @@ define([
         this.currentAnimation = this.animationSet.idle.right;
     }
 
-    NPC.prototype.addDialog = function (dialog) {
-        this.dialog = dialog;
-    };
-
     return NPC;
 });
